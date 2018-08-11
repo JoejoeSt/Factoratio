@@ -8,7 +8,7 @@ public class Node : MonoBehaviour
     public Text amountText;
     public InputField amountField;
     public InputField item;
-    public GraphNode node;
+    public GraphNode graphNode;
     public GameObject connector;
 
     private Node counterpart;
@@ -16,7 +16,7 @@ public class Node : MonoBehaviour
 
     public void SetNode(GraphNode parentNode)
     {
-        node = parentNode;
+        graphNode = parentNode;
     }
 
     public void SetCounterpart(Node newCounterpart)

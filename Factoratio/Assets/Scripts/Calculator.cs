@@ -11,17 +11,29 @@ public class Calculator : MonoBehaviour
     { 
         FillLists();
 
-        List<Node> activeNodes = new List<Node>();
-
         foreach (TargetOutput target in targets)
         {
-            target.;
+            CalculateFromTarget(target);
         }
 
         foreach (MaxInput input in inputs)
         {
-            input.;
+            CalculateFromInput(input);
         }
+    }
+
+    private void CalculateFromTarget(TargetOutput target)
+    {
+        List<Node> activeNodes = new List<Node>();
+
+
+    }
+
+    private void CalculateFromInput(MaxInput input)
+    {
+        List<Node> activeNodes = new List<Node>();
+
+
     }
 
     private void FillLists()

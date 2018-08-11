@@ -20,7 +20,7 @@ public class Connector : MonoBehaviour
         }
         else
         {
-            if(start.GetComponent<InputNode>() == node.GetComponent<InputNode>() || start.GetComponent<OutputNode>() == node.GetComponent<OutputNode>() || start.GetComponent<Node>().node == node.GetComponent<Node>().node)
+            if(start.GetComponent<InputNode>() == node.GetComponent<InputNode>() || start.GetComponent<OutputNode>() == node.GetComponent<OutputNode>() || start.GetComponent<Node>().graphNode == node.GetComponent<Node>().graphNode)
             {
                 start = node;
                 startConnectionPoint = connectionPoint;

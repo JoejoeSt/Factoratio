@@ -3857,9 +3857,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1124272624547788, guid: c86b254c0c8dec846a5a3820b46333ae, type: 2}
-  inputPrefab: {fileID: 1960055098493014, guid: a989c9b6012a17b4bb5c1ba4e4c296aa,
+  inputPrefab: {fileID: 1645179587031668, guid: 0ae47f76836d3fc4595255cdbcd53e25,
     type: 2}
-  outputPrefab: {fileID: 1541950016820868, guid: c08b448b5a0c95049a0db8d49db60703,
+  outputPrefab: {fileID: 1214929279096064, guid: 0400e477ec5067548afe23681063b9a2,
     type: 2}
   inputSlider: {fileID: 1038784181}
   outputSlider: {fileID: 1612382168}
