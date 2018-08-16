@@ -1,4 +1,4 @@
-Den Ordner "Faktoratio" in diesem Verzeichnis mit Unity öffnen.
+Den Ordner "Factoratio" in diesem Verzeichnis mit Unity öffnen.
 Im Ordner "Build" findet man immer die neueste ausführbare Version.
 
 Erklärung des Programmes:
