@@ -18,11 +18,16 @@ public class Placer : MonoBehaviour
         {
             currentObjectToPlace.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0) + GetPositionOfCurserOnBackground();
         }
+        else
+        {
+            return;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
             if (Input.mousePosition.x < (float) Screen.width * 0.8f)
             {
+                currentObjectToPlace.GetComponent<GraphNode>().Reconnect();
                 currentObjectToPlace = null;
             }
             else

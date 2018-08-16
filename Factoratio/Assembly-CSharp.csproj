@@ -66,9 +66,9 @@
     <Compile Include="Assets\Scripts\Connector.cs" />
     <Compile Include="Assets\Scripts\Creator.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
+    <Compile Include="Assets\Scripts\InOutNode.cs" />
     <Compile Include="Assets\Scripts\InputNode.cs" />
     <Compile Include="Assets\Scripts\MaxInput.cs" />
-    <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\OutputNode.cs" />
     <Compile Include="Assets\Scripts\Placer.cs" />
     <Compile Include="Assets\Scripts\ProcessStep.cs" />

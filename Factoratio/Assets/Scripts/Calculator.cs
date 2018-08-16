@@ -24,14 +24,14 @@ public class Calculator : MonoBehaviour
 
     private void CalculateFromTarget(TargetOutput target)
     {
-        List<Node> activeNodes = new List<Node>();
+        List<GraphNode> activeNodes = new List<GraphNode>();
 
 
     }
 
     private void CalculateFromInput(MaxInput input)
     {
-        List<Node> activeNodes = new List<Node>();
+        List<GraphNode> activeNodes = new List<GraphNode>();
 
 
     }

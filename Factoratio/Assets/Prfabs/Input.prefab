@@ -179,7 +179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Amount
+  m_Text: Amount/s
 --- !u!114 &114752471665655418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.5019608, b: 0, a: 1}
+    m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -407,7 +407,7 @@ MonoBehaviour:
   amountText: {fileID: 114038653858179494}
   amountField: {fileID: 0}
   item: {fileID: 114826332049984976}
-  node: {fileID: 0}
+  graphNode: {fileID: 0}
   connector: {fileID: 1648027397853748}
 --- !u!222 &222028819480473524
 CanvasRenderer:
