@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Johannes/Factoratio/Builds/Factoratio.exe
+C:/Users/Johannes/Documents/GitHub/Factoratio/Build/Factoratio.exe
 SceneListBegin?
 Assets/Scenes/Scene.unity
 SceneListEnd?
@@ -19,9 +19,10 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 f6637497451c9a030c421de4a1ad5cdb Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.CameraMovement
-466346f756bf89224de5e05f92364a16 Assembly-CSharp.dll:.Node
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.CameraMovementMouse
+5841a0ab9324fd51b9a6ca97a4fe7439 Assembly-CSharp.dll:.InOutNode
 b14b4630cc47b6e9ea8a644551a6a8cc Unity.TextMeshPro.dll:TMPro.TMP_Text
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.Calculator
 53cefe5d98cadefbab750835e70b89c0 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 486cd95c82d8305219c352c06b776e1f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 da2091a04d360891450faf16cdf621f1 UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -118,7 +119,7 @@ fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networki
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 c6f5e8fff7e5d9b4f048d0af558a6985 Assembly-CSharp.dll:.ProcessStep
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-466346f756bf89224de5e05f92364a16 Assembly-CSharp.dll:.InputNode
+5841a0ab9324fd51b9a6ca97a4fe7439 Assembly-CSharp.dll:.InputNode
 382b8ef512fa8d6108723a01b57af65b UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 d22c788799ee45d8676254eccf20e8b8 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
@@ -128,7 +129,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-466346f756bf89224de5e05f92364a16 Assembly-CSharp.dll:.OutputNode
+5841a0ab9324fd51b9a6ca97a4fe7439 Assembly-CSharp.dll:.OutputNode
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 2a00bae7e9ef60d802cb2ab40b4910d9 Assembly-CSharp.dll:.GraphNode
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
@@ -177,3 +178,5 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 0ba42d8d1cbfb1f1065eebde5b8cfa01 Assembly-CSharp.dll:.Connector
 137092c9dfaf5e5979e583cffeb6cfc9 Assembly-CSharp.dll:.SliderToTextNumber
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.CameraMovementTouch
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.CameraMovement

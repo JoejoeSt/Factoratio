@@ -26,7 +26,11 @@ public class GraphNode : MonoBehaviour
 
     private void Update()
     {
-        if (mouseOver && Input.GetMouseButtonDown(1))
+        if ((mouseOver && Input.GetMouseButtonDown(1) && Input.touchCount == 0))
+        {
+            Reposition();
+        }
+        else if(Input.touchCount == 1 && Input.GetTouch(0).radius > 30 &&TouchOnThis())
         {
             Reposition();
         }
@@ -72,6 +76,19 @@ public class GraphNode : MonoBehaviour
         }
     }
 
+    public void ClearConnections()
+    {
+        foreach (InputNode input in inputs)
+        {
+            input.ClearConnection();
+        }
+
+        foreach (OutputNode output in outputs)
+        {
+            output.ClearConnection();
+        }
+    }
+
     public void Reposition()
     {
         Camera.main.GetComponent<Placer>().GiveObjectToPlace(this.gameObject);
@@ -85,5 +102,23 @@ public class GraphNode : MonoBehaviour
     public void MouseExit()
     {
         mouseOver = false;
+    }
+
+    private bool TouchOnThis()
+    {
+        Vector2 camPosition = Camera.main.transform.position;
+
+        Vector2 positionOfTouchRelativeToCenter = Input.GetTouch(0).position - new Vector2(Screen.width / 2, Screen.height / 2);
+        float zoomFactor = (float)Screen.height / 2 / Camera.main.orthographicSize;
+        Vector2 touchPositionRelativeToCam = positionOfTouchRelativeToCenter / zoomFactor;
+
+        Vector2 touchPosition = camPosition + touchPositionRelativeToCam;
+
+        float x = this.GetComponent<RectTransform>().position.x;
+        float width = this.GetComponent<RectTransform>().rect.width;
+        float y = this.GetComponent<RectTransform>().position.y;
+        float height = this.GetComponent<RectTransform>().rect.height;
+
+        return x - width/2 <= touchPosition.x && x + width/2 >= touchPosition.x && y - height/2 <= touchPosition.y && y + height/2 >= touchPosition.y;
     }
 }

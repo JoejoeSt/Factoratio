@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Calculator.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\CameraMovementMouse.cs" />
+    <Compile Include="Assets\Scripts\CameraMovementTouch.cs" />
     <Compile Include="Assets\Scripts\Connector.cs" />
     <Compile Include="Assets\Scripts\Creator.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />

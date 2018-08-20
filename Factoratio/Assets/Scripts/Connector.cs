@@ -52,6 +52,16 @@ public class Connector : MonoBehaviour
         start.GetComponent<InOutNode>().CheckItemName();
     }
 
+    public void Reconnect(GameObject firstNode, Vector2 firstConnectionPoint, GameObject secondNode, Vector2 secondConnectionPoint)
+    {
+        start = firstNode;
+        startConnectionPoint = firstConnectionPoint;
+        GameObject newConnectingLine = CreateConnector(secondNode, secondConnectionPoint);
+
+        start.GetComponent<InOutNode>().SetConnectingLine(newConnectingLine);
+        secondNode.GetComponent<InOutNode>().SetConnectingLine(newConnectingLine);
+    }
+
     private GameObject CreateConnector(GameObject secondNode, Vector2 secondConnectionPoint)
     {
         if(start.GetComponent<InputNode>() != null)

@@ -90,11 +90,8 @@ public class InOutNode : MonoBehaviour
             return;
         }
 
-        Vector2 differenceVector = connector.transform.position - counterpart.connector.transform.position;
+        Destroy(connectingLine);
 
-        connectingLine.GetComponent<RectTransform>().sizeDelta = new Vector2(differenceVector.magnitude, 10);
-        connectingLine.GetComponent<RectTransform>().position = connector.transform.position;
-        float angle = Mathf.Atan2(differenceVector.y, differenceVector.x) * Mathf.Rad2Deg;
-        connectingLine.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, angle);
+        GameObject.Find("Connectors").GetComponent<Connector>().Reconnect(this.gameObject, connector.transform.position, counterpart.gameObject, counterpart.connector.transform.position);
     }
 }

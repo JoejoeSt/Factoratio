@@ -16,7 +16,7 @@ public class Placer : MonoBehaviour
     {
         if (currentObjectToPlace != null)
         {
-            currentObjectToPlace.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0) + GetPositionOfCurserOnBackground();
+            currentObjectToPlace.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0) + GetPositionOfCurserRelativeToCam();
         }
         else
         {
@@ -32,18 +32,19 @@ public class Placer : MonoBehaviour
             }
             else
             {
+                currentObjectToPlace.GetComponent<GraphNode>().ClearConnections();
                 Destroy(currentObjectToPlace);
             }
         }
 
     }
 
-    public Vector3 GetPositionOfCurserOnBackground()
+    public Vector3 GetPositionOfCurserRelativeToCam()
     {
         Vector3 positionOfCursorRelativeToCenter = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);    
         float zoomFactor = (float) Screen.height / 2 / Camera.main.orthographicSize;
-        Vector3 mousePositionOnBackground = positionOfCursorRelativeToCenter / zoomFactor;
+        Vector3 mousePositionRelativeToCam = positionOfCursorRelativeToCenter / zoomFactor;
 
-        return mousePositionOnBackground;
+        return mousePositionRelativeToCam;
     }
 }
