@@ -23,7 +23,7 @@ public class Placer : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Input.touchCount < 2)
         {
             if (Input.mousePosition.x < (float) Screen.width * 0.8f)
             {
