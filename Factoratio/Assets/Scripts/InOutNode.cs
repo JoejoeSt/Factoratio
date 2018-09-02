@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InOutNode : MonoBehaviour
+public abstract class InOutNode : MonoBehaviour
 {
     public Text amountText;
     public InputField amountField;
@@ -93,5 +93,25 @@ public class InOutNode : MonoBehaviour
         Destroy(connectingLine);
 
         GameObject.Find("Connectors").GetComponent<Connector>().Reconnect(this.gameObject, connector.transform.position, counterpart.gameObject, counterpart.connector.transform.position);
+    }
+
+    public void TellCounterpart()
+    {
+        if(counterpart == null)
+        {
+            return;
+        }
+
+        float amount = float.Parse(amountText.text);
+
+        counterpart.TellNode(amount);
+    }
+
+    public abstract void TellNode(float wantedValue);
+
+    public void SetAmount(float machinecount)
+    {
+        float amount = machinecount * float.Parse(amountField.GetComponentInChildren<Text>().text);
+        amountText.text = amount.ToString();
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphNode : MonoBehaviour
+public abstract class GraphNode : MonoBehaviour
 {
     public List<InputNode> inputs;
     public List<OutputNode> outputs;
@@ -121,4 +121,6 @@ public class GraphNode : MonoBehaviour
 
         return x - width/2 <= touchPosition.x && x + width/2 >= touchPosition.x && y - height/2 <= touchPosition.y && y + height/2 >= touchPosition.y;
     }
+
+    public abstract void Calculate(InOutNode changeingNode, float wantedValue);
 }
