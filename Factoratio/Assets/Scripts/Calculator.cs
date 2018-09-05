@@ -9,11 +9,14 @@ public class Calculator : MonoBehaviour
     public void Calculate()
     { 
         FillList();
+        ResetGraphNodes();
 
         foreach (TargetOutput target in targets)
         {
             target.Calculate();
         }
+
+
     }
 
     private void FillList()
@@ -23,6 +26,14 @@ public class Calculator : MonoBehaviour
         foreach (GameObject targetOutput in GameObject.FindGameObjectsWithTag("TargetOutput"))
         {
             targets.Add(targetOutput.GetComponent<TargetOutput>());
+        }
+    }
+
+    private void ResetGraphNodes()
+    {
+        foreach(Transform graphNode in GameObject.Find("GraphNodes").transform)
+        {
+            graphNode.GetComponent<GraphNode>().Reset();
         }
     }
 }

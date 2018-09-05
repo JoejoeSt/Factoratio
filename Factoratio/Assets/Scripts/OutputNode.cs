@@ -7,7 +7,7 @@ public class OutputNode : InOutNode
 {
     public override void TellNode(float wantedValue)
     {
-        if (amountText.text == "Amount/s" || wantedValue > float.Parse(amountText.text))
+        if (wantedValue > GetTextAmount())
         {
             graphNode.Calculate(this, wantedValue);
         }

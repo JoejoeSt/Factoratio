@@ -576,13 +576,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114645507816336466}
   m_TextComponent: {fileID: 114425130636137258}
   m_Placeholder: {fileID: 114515124981234838}
-  m_ContentType: 2
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 1
+  m_CharacterValidation: 2
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -628,6 +628,7 @@ MonoBehaviour:
   item: {fileID: 114262325277616494}
   graphNode: {fileID: 0}
   connector: {fileID: 1411180158884654}
+  intermediateProducts: {fileID: 0}
 --- !u!222 &222036760354899112
 CanvasRenderer:
   m_ObjectHideFlags: 1

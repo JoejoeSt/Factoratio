@@ -45,7 +45,7 @@ public class Creator : MonoBehaviour
 
     public void CreateGraphInOutput()
     {
-        GameObject newObject = Instantiate(prefab, GameObject.Find("GraphArea").transform.Find("GraphNodes").transform);
+        GameObject newObject = Instantiate(prefab, GameObject.Find("GraphNodes").transform);
 
         placer.GiveObjectToPlace(newObject);
     }

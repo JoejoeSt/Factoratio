@@ -56,12 +56,12 @@ public abstract class InOutNode : MonoBehaviour
             return;
         }
 
-        if(item.transform.Find("Text").GetComponent<Text>().text == "" || counterpart.item.transform.Find("Text").GetComponent<Text>().text == "")
+        if (item.text == "" || counterpart.item.text == "")
         {
             ColorItemField(Color.yellow);
             counterpart.ColorItemField(Color.yellow);
         }
-        else if(item.transform.Find("Text").GetComponent<Text>().text != counterpart.item.transform.Find("Text").GetComponent<Text>().text)
+        else if(item.text != counterpart.item.text)
         {
             ColorItemField(Color.red);
             counterpart.ColorItemField(Color.red);
@@ -102,16 +102,59 @@ public abstract class InOutNode : MonoBehaviour
             return;
         }
 
-        float amount = float.Parse(amountText.text);
+        float amount;
+        if(amountText.text == "Amount/s")
+        {
+            amount = 0;
+        }
+        else
+        {
+            amount = float.Parse(amountText.text);
+        }
 
         counterpart.TellNode(amount);
     }
 
     public abstract void TellNode(float wantedValue);
 
-    public void SetAmount(float machinecount)
+    public void SetAmountWithCycles(float cyclesPerSecond)
     {
-        float amount = machinecount * float.Parse(amountField.GetComponentInChildren<Text>().text);
+        float amount = cyclesPerSecond * GetFieldAmount();
         amountText.text = amount.ToString();
+    }
+
+    public void SetAmountWithAmount(float amount)
+    {
+        amountText.text = amount.ToString();
+    }
+
+    public float GetTextAmount()
+    {
+        if (amountText.text == "Amount/s")
+        {
+            return 0;
+        }
+        else
+        {
+            return float.Parse(amountText.text);
+        }
+    }
+
+    public float GetFieldAmount()
+    {
+        float amount;
+        if (!float.TryParse(amountField.text, out amount))
+        {
+            return 0;
+        }
+        else
+        {
+            return amount;
+        }
+    }
+
+    public void Reset()
+    {
+        amountText.text = "Amount/s";
     }
 }

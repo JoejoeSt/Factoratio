@@ -7,9 +7,12 @@ public abstract class GraphNode : MonoBehaviour
     public List<InputNode> inputs;
     public List<OutputNode> outputs;
 
+    protected bool tellingNodes;
+    protected List<InOutNode> nodesToTell;
+
     private bool mouseOver;
 
-    void Start()
+    protected void Start()
     {
         if(inputs == null)
         {
@@ -20,13 +23,14 @@ public abstract class GraphNode : MonoBehaviour
         {
             outputs = new List<OutputNode>();
         }
+        nodesToTell = new List<InOutNode>();
 
         mouseOver = false;
     }
 
     private void Update()
     {
-        if ((mouseOver && Input.GetMouseButtonDown(1) && Input.touchCount == 0))
+        if (mouseOver && Input.GetMouseButtonDown(1) && Input.touchCount == 0)
         {
             Reposition();
         }
@@ -122,5 +126,21 @@ public abstract class GraphNode : MonoBehaviour
         return x - width/2 <= touchPosition.x && x + width/2 >= touchPosition.x && y - height/2 <= touchPosition.y && y + height/2 >= touchPosition.y;
     }
 
+    protected void TellNodes()
+    {
+        if (tellingNodes)
+        {
+            return;
+        }
+        tellingNodes = true;
+        while(nodesToTell.Count != 0)
+        {
+            nodesToTell[0].TellCounterpart();
+            nodesToTell.RemoveAt(0);
+        }
+        tellingNodes = false;
+    }
+
     public abstract void Calculate(InOutNode changeingNode, float wantedValue);
+    public abstract void Reset();
 }

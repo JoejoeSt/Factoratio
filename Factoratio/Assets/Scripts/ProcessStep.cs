@@ -10,13 +10,13 @@ public class ProcessStep : GraphNode
     public Text machineNumber;
 
     private bool isAtMax = false;
-    private float cyclesPerSecond;
+    private float cyclesPerSecondMachine;
 
     public void CalculateCycles()
     {
         if (time.text.Length != 0 && speed.text.Length != 0)
         {
-            cyclesPerSecond = (float)1 / float.Parse(time.text) * float.Parse(speed.text);
+            cyclesPerSecondMachine = (float)1 / float.Parse(time.text) * float.Parse(speed.text);
         }
     }
 
@@ -26,39 +26,48 @@ public class ProcessStep : GraphNode
         {
             if(input == changeingNode)
             {
-                CalculateForInput(changeingNode, wantedValue);
+                CalculateForInput((InputNode) changeingNode, wantedValue);
                 return;
             }
         }
-        CalculateForOutput(changeingNode, wantedValue);
+        CalculateForOutput((OutputNode) changeingNode, wantedValue);
+
+        TellNodes();
     }
 
-    private void CalculateForInput(InOutNode input, float wantedValue)
+    private void CalculateForInput(InputNode input, float wantedValue)
     {
-        //Zwischenprodukte erlaubt ?
-        isAtMax = true;
-        float recipeAmount = float.Parse(input.amountField.GetComponentInChildren<Text>().text);
-        float possibleMachines = wantedValue / (recipeAmount * cyclesPerSecond);
-        machineNumber.text = possibleMachines + " (" + Mathf.CeilToInt(possibleMachines) + ")";
+        if (input.GetTextAmount() > wantedValue)
+        {
+            isAtMax = true;
+        }
 
+        float recipeAmount = input.GetFieldAmount();
+        float possibleMachines = CalculatePossibleMachines(wantedValue / (recipeAmount * cyclesPerSecondMachine));
+
+        input.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
         foreach (InputNode inputNode in inputs)
         {
-            if(inputNode == input)
+            if (inputNode != input)
             {
-                inputNode.SetAmount(possibleMachines * cyclesPerSecond);
-                continue;
+                inputNode.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
+                if (!nodesToTell.Contains(inputNode))
+                {
+                    nodesToTell.Add(inputNode);
+                }
             }
-            inputNode.SetAmount(possibleMachines * cyclesPerSecond);
-            inputNode.TellCounterpart();
         }
         foreach (OutputNode outputNode in outputs)
         {
-            outputNode.SetAmount(possibleMachines * cyclesPerSecond);
-            outputNode.TellCounterpart();
+            outputNode.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
+            if (!nodesToTell.Contains(outputNode))
+            {
+                nodesToTell.Add(outputNode);
+            }
         }
     }
 
-    private void CalculateForOutput(InOutNode output, float wantedValue)
+    private void CalculateForOutput(OutputNode output, float wantedValue)
     {
         if(isAtMax)
         {
@@ -66,22 +75,62 @@ public class ProcessStep : GraphNode
             return;
         }
 
-        float recipeAmount = float.Parse(output.amountField.GetComponentInChildren<Text>().text);
-        float possibleMachines = wantedValue / (recipeAmount * cyclesPerSecond);
-        machineNumber.text = possibleMachines + " (" + Mathf.CeilToInt(possibleMachines) + ")";
+        float recipeAmount = output.GetFieldAmount();
+        float possibleMachines = CalculatePossibleMachines(wantedValue / (recipeAmount * cyclesPerSecondMachine));
 
+        output.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
         foreach (InputNode inputNode in inputs)
         {
-            inputNode.SetAmount(possibleMachines * cyclesPerSecond);
-            inputNode.TellCounterpart();
+            inputNode.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
+            if (!nodesToTell.Contains(inputNode))
+            {
+                nodesToTell.Add(inputNode);
+            }
         }
         foreach (OutputNode outputNode in outputs)
         {
-            if(outputNode == output)
+            if (outputNode != output)
             {
-                continue;
+                outputNode.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
+                if (!nodesToTell.Contains(outputNode))
+                {
+                    nodesToTell.Add(outputNode);
+                }
             }
-            outputNode.SetAmount(possibleMachines * cyclesPerSecond);
         }
+    }
+
+    private float CalculatePossibleMachines(float currentMachines)
+    {
+        float possibleMachines = currentMachines;
+        if(!isAtMax)
+        {
+            machineNumber.text = possibleMachines + " (" + Mathf.CeilToInt(possibleMachines) + ")";
+            return possibleMachines;
+        }
+        foreach (InputNode inputNode in inputs)
+        {
+            if (inputNode.amountText.text != "Amount/s")
+            {
+                possibleMachines = Mathf.Min(inputNode.GetTextAmount() / (inputNode.GetFieldAmount() * cyclesPerSecondMachine), possibleMachines);
+            }
+        }
+        machineNumber.text = possibleMachines + " (" + Mathf.CeilToInt(possibleMachines) + ")";
+        return possibleMachines;
+    }
+
+    public override void Reset()
+    {
+        foreach (InputNode input in inputs)
+        {
+            input.Reset();
+        }
+        foreach (OutputNode output in outputs)
+        {
+            output.Reset();
+        }
+
+        machineNumber.text = "X";
+        isAtMax = false;
     }
 }

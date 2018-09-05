@@ -292,13 +292,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114659103758805314}
   m_TextComponent: {fileID: 114387341493552892}
   m_Placeholder: {fileID: 114253311037353272}
-  m_ContentType: 0
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 2
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -333,6 +333,7 @@ MonoBehaviour:
   item: {fileID: 114469690655001104}
   graphNode: {fileID: 114798086253953620}
   connector: {fileID: 1290456947516762}
+  intermediateProducts: {fileID: 0}
 --- !u!114 &114127655460988540
 MonoBehaviour:
   m_ObjectHideFlags: 1
