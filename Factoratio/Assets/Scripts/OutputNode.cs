@@ -7,9 +7,6 @@ public class OutputNode : InOutNode
 {
     public override void TellNode(float wantedValue)
     {
-        if (wantedValue > GetTextAmount())
-        {
-            graphNode.Calculate(this, wantedValue);
-        }
+        graphNode.Calculate(this, wantedValue);
     }
 }

@@ -115,8 +115,6 @@ public abstract class InOutNode : MonoBehaviour
         counterpart.TellNode(amount);
     }
 
-    public abstract void TellNode(float wantedValue);
-
     public void SetAmountWithCycles(float cyclesPerSecond)
     {
         float amount = cyclesPerSecond * GetFieldAmount();
@@ -152,6 +150,8 @@ public abstract class InOutNode : MonoBehaviour
             return amount;
         }
     }
+
+    public abstract void TellNode(float wantedValue);
 
     public void Reset()
     {

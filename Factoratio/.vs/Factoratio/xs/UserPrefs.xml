@@ -1,18 +1,17 @@
 ﻿<Properties StartupConfiguration="{640697DB-8874-E08C-CA1E-1A18D6ACBD53}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Creator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Splitter.cs">
     <Files>
-      <File FileName="Assets/Scripts/InOutNode.cs" Line="152" Column="29" />
-      <File FileName="Assets/Scripts/InputNode.cs" Line="12" Column="45" />
-      <File FileName="Assets/Scripts/OutputNode.cs" Line="10" Column="42" />
-      <File FileName="Assets/Scripts/GraphNode.cs" Line="116" Column="20" />
-      <File FileName="Assets/Scripts/ProcessStep.cs" Line="45" Column="52" />
-      <File FileName="Assets/Scripts/Splitter.cs" Line="83" Column="28" />
-      <File FileName="Assets/Scripts/MaxInput.cs" Line="10" Column="54" />
-      <File FileName="Assets/Scripts/TargetOutput.cs" Line="22" Column="6" />
-      <File FileName="Assets/Scripts/SplitterPriorityser.cs" Line="62" Column="9" />
-      <File FileName="Assets/Scripts/Calculator.cs" Line="13" Column="9" />
-      <File FileName="Assets/Scripts/Creator.cs" Line="48" Column="1" />
+      <File FileName="Assets/Scripts/Calculator.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/InOutNode.cs" Line="154" Column="54" />
+      <File FileName="Assets/Scripts/InputNode.cs" Line="9" Column="6" />
+      <File FileName="Assets/Scripts/OutputNode.cs" Line="9" Column="6" />
+      <File FileName="Assets/Scripts/GraphNode.cs" Line="14" Column="43" />
+      <File FileName="Assets/Scripts/ProcessStep.cs" Line="74" Column="29" />
+      <File FileName="Assets/Scripts/Splitter.cs" Line="395" Column="9" />
+      <File FileName="Assets/Scripts/MaxInput.cs" Line="15" Column="1" />
+      <File FileName="Assets/Scripts/TargetOutput.cs" Line="12" Column="20" />
+      <File FileName="Assets/Scripts/SplitterPriorityser.cs" Line="54" Column="39" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.Debugger.WatchPad">

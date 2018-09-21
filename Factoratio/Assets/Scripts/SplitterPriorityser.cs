@@ -14,11 +14,11 @@ public class SplitterPriorityser : MonoBehaviour
     {
         inOutput = this.GetComponentInParent<InOutNode>();
 
-        node = (Splitter) inOutput.graphNode;
+        node = (Splitter)inOutput.graphNode;
         isInput = false;
         foreach (InputNode input in node.inputs)
         {
-            if(input == inOutput)
+            if (input == inOutput)
             {
                 isInput = true;
             }
@@ -27,7 +27,7 @@ public class SplitterPriorityser : MonoBehaviour
 
     public void ChangePriority()
     {
-        if(isInput)
+        if (isInput)
         {
             ChangePriorityForInput();
         }
@@ -40,7 +40,7 @@ public class SplitterPriorityser : MonoBehaviour
     private void ChangePriorityForInput()
     {
         int value;
-        if(this.GetComponentInChildren<Text>().text == "No Demanding")
+        if (this.GetComponentInChildren<Text>().text == "No Demanding")
         {
             value = node.inputs.Count + 1;
         }
@@ -49,25 +49,25 @@ public class SplitterPriorityser : MonoBehaviour
             value = int.Parse(this.GetComponentInChildren<Text>().text);
         }
 
-        value = value % (node.inputs.Count + 1) + 1;
+        value %= node.inputs.Count + 1;
 
-        if (value == node.inputs.Count + 1)
+        if (value == node.inputs.Count)
         {
             this.GetComponentInChildren<Text>().text = "No Demanding";
         }
         else
         {
-            this.GetComponentInChildren<Text>().text = value.ToString();
+            this.GetComponentInChildren<Text>().text = (value + 1).ToString();
         }
-        node.ChangePriority(inOutput, value - 1);
+        node.ChangePriority(inOutput, value);
     }
 
     private void ChangePriorityForOutput()
     {
         int value = int.Parse(this.GetComponentInChildren<Text>().text);
-        value = value % node.outputs.Count + 1;
+        value %= node.outputs.Count;
 
-        this.GetComponentInChildren<Text>().text = value.ToString();
-        node.ChangePriority(inOutput, value - 1);
+        this.GetComponentInChildren<Text>().text = (value + 1).ToString();
+        node.ChangePriority(inOutput, value);
     }
 }

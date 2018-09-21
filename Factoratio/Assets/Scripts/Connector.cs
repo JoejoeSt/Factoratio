@@ -111,7 +111,16 @@ public class Connector : MonoBehaviour
         
         for (int i = 0; i < zigzagConnectionPoints.Count - 1; i++)
         {
-            GameObject newConnectingLine = CreateStraightConnector(zigzagConnectionPoints[i], zigzagConnectionPoints[i+1]);
+            GameObject newConnectingLine;
+            if (i != zigzagConnectionPoints.Count - 2)
+            {
+                Vector2 differenceVector = zigzagConnectionPoints[i + 1] - zigzagConnectionPoints[i];
+                newConnectingLine = CreateStraightConnector(zigzagConnectionPoints[i], zigzagConnectionPoints[i + 1] + 5 * differenceVector.normalized);
+            }
+            else
+            {
+                newConnectingLine = CreateStraightConnector(zigzagConnectionPoints[i], zigzagConnectionPoints[i + 1]);
+            }
             newConnectingLine.transform.SetParent(newConnectingLineContainer.transform);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class GraphNode : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public abstract class GraphNode : MonoBehaviour
 
     protected bool tellingNodes;
     protected List<InOutNode> nodesToTell;
+
+    protected Toggle intermediateProducts;
 
     private bool mouseOver;
 
@@ -24,6 +27,8 @@ public abstract class GraphNode : MonoBehaviour
             outputs = new List<OutputNode>();
         }
         nodesToTell = new List<InOutNode>();
+
+        intermediateProducts = GameObject.Find("Toggle").GetComponent<Toggle>();//
 
         mouseOver = false;
     }

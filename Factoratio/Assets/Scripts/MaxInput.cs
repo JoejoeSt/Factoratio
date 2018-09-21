@@ -12,7 +12,6 @@ public class MaxInput : GraphNode
         if (maxValue < wantedValue)
         {
             outputs[0].SetAmountWithAmount(maxValue);
-            //Einfärben
             outputs[0].TellCounterpart();
         }
         else
