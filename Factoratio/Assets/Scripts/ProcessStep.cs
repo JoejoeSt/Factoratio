@@ -70,10 +70,10 @@ public class ProcessStep : GraphNode
 
         foreach (InputNode input in inputs)
         {
-            inputNode.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
-            if (!nodesToTell.Contains(inputNode) && inputNode != input)
+            input.SetAmountWithCycles(possibleMachines * cyclesPerSecondMachine);
+            if (!nodesToTell.Contains(input) && inputNode != input)
             {
-                nodesToTell.Add(inputNode);
+                nodesToTell.Add(input);
             }
         }
         foreach (OutputNode output in outputs)
@@ -117,10 +117,10 @@ public class ProcessStep : GraphNode
         }
         foreach (OutputNode output in outputs)
         {
-            outputNode.SetAmountWithCycles(wantedMachines * cyclesPerSecondMachine);
-            if (!nodesToTell.Contains(outputNode) && outputNode != output)
+            output.SetAmountWithCycles(wantedMachines * cyclesPerSecondMachine);
+            if (!nodesToTell.Contains(output) && outputNode != output)
             {
-                nodesToTell.Add(outputNode);
+                nodesToTell.Add(output);
             }
         }
 

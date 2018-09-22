@@ -36,185 +36,6 @@ public class Splitter : GraphNode
         }
     }
 
-    /*
-    public override void Calculate(InOutNode changeingNode, float wantedValue)
-    {
-        foreach (InputNode inputNode in inputs)
-        {
-            if (inputNode == changeingNode)
-            {
-                if (inputNode.GetTextAmount() < wantedValue && !intermediateProducts.isOn && inputPriorities[inputs.IndexOf(inputNode)] != inputs.Count)
-                {
-                    return;
-                }
-                CalculateForInput(inputNode, wantedValue);
-                break;
-            }
-        }
-        foreach (OutputNode outputNode in outputs)
-        {
-            if (outputNode == changeingNode)
-            {
-                CalculateForOutput(outputNode, wantedValue);
-                break;
-            }
-        }
-
-        dumpAmount.text = "X";
-        if (GetCurrentInputAmount() > GetCurrentOutputAmount())
-        {
-            HandleMoreInput();
-        }
-        else
-        {
-            List<InputNode> inputNodes = GetAvailableInputs();
-            if (inputNodes.Count == 0)
-            {
-                LimitOutputs();
-            }
-            else
-            {
-                DemandFromInputs(inputNodes);
-            }
-        }
-        TellNodes();
-    }
-
-    private void CalculateForInput(InputNode inputNode, float wantedValue)
-    {
-        if((GetCurrentInputAmount() - GetCurrentOutputAmount() - inputNode.GetTextAmount() + wantedValue) < 0)
-        //if (inputNode.GetTextAmount() > wantedValue)
-        {
-            maxedOutInputs[inputs.IndexOf(inputNode)] = true;
-        }
-        inputNode.SetAmountWithAmount(wantedValue);
-    }
-
-    private void CalculateForOutput(OutputNode outputNode, float wantedValue)
-    {
-        outputNode.SetAmountWithAmount(wantedValue);
-        wantedOutputValues[outputs.IndexOf(outputNode)] = wantedValue;
-    }
-
-    private void LimitOutputs()
-    {
-        int priorityToLimit = outputs.Count - 1;
-        while(GetCurrentOutputAmount() > GetCurrentInputAmount())
-        {
-            List<OutputNode> outputsToLimit = GetOutputsByPriority(priorityToLimit, false);
-            float amountToMuch = GetCurrentOutputAmount() - GetCurrentInputAmount();
-            foreach (OutputNode outputNode in outputsToLimit)
-            {
-                outputNode.SetAmountWithAmount(Mathf.Max(outputNode.GetTextAmount() - amountToMuch / outputsToLimit.Count, 0));
-                if (!nodesToTell.Contains(outputNode))
-                {
-                    nodesToTell.Add(outputNode);
-                }
-            }
-            if(GetOutputsByPriority(priorityToLimit, false).Count == 0)
-            {
-                priorityToLimit--;
-            }
-        }
-    }
-
-    private void DemandFromInputs(List<InputNode> inputNodes)
-    {
-        float demandedAmount = GetCurrentOutputAmount() - GetCurrentInputAmount();
-        foreach (InputNode inputNode in inputNodes)
-        {
-            inputNode.SetAmountWithAmount(inputNode.GetTextAmount() + demandedAmount / inputNodes.Count);
-            if(!nodesToTell.Contains(inputNode))
-            {
-                nodesToTell.Add(inputNode);
-            }
-        }
-    }
-
-    private void HandleMoreInput()
-    {
-        GiveMoreToOutputs(false);
-        DemandLessFromInputs();
-        if(dumpExcess.isOn)
-        {
-            Dump();
-        }
-        else
-        {
-            GiveMoreToOutputs(true);
-        }
-    }
-
-    private void GiveMoreToOutputs(bool dontUseWantedValues)
-    {
-        int priorityToGive = 0;
-        while (GetCurrentInputAmount() > GetCurrentOutputAmount() && priorityToGive < outputs.Count)
-        {
-            List<OutputNode> outputsToGive = GetOutputsByPriority(priorityToGive, true);
-            float amountToMuch = GetCurrentInputAmount() - GetCurrentOutputAmount();
-            foreach (OutputNode outputNode in outputsToGive)
-            {
-                if(outputNode.GetTextAmount() < wantedOutputValues[outputs.IndexOf(outputNode)] || dontUseWantedValues)
-                {
-                    outputNode.SetAmountWithAmount(outputNode.GetTextAmount() + amountToMuch / outputsToGive.Count);
-                    if(!nodesToTell.Contains(outputNode))
-                    {
-                        nodesToTell.Add(outputNode);
-                    }
-                }
-            }
-            priorityToGive++;
-        }
-    }
-
-    private void DemandLessFromInputs()
-    {
-
-    }
-
-    private void Dump()
-    {
-        dumpAmount.text = (GetCurrentInputAmount() - GetCurrentOutputAmount()).ToString();
-    }
-
-    private List<InputNode> GetAvailableInputs()
-    {
-        List<InputNode> returnValue = new List<InputNode>();
-        for (int i = 0; i < inputs.Count; i++)
-        {
-            for (int j = 0; j < inputs.Count; j++)
-            {
-                if (!maxedOutInputs[j] && inputPriorities[j] == i)
-                {
-                    returnValue.Add(inputs[j]);
-                }
-            }
-            if(returnValue.Count > 0)
-            {
-                return returnValue;
-            }
-        }
-        return new List<InputNode>();
-    }
-
-    private List<OutputNode> GetOutputsByPriority(int priority, bool wantZeroOutputs)
-    {
-        List<OutputNode> returnValue = new List<OutputNode>();
-        for (int i = 0; i < outputs.Count; i++)
-        {
-            if(outputPriorities[i] == priority && (outputs[i].GetTextAmount() > 0 || wantZeroOutputs))
-            {
-                returnValue.Add(outputs[i]);
-            }
-            if (returnValue.Count > 0)
-            {
-                return returnValue;
-            }
-        }
-        return new List<OutputNode>();
-    }
-    */
-
     public override void Calculate(InOutNode changeingNode, float wantedValue)
     {
         foreach (InputNode inputNode in inputs)
@@ -241,20 +62,12 @@ public class Splitter : GraphNode
 
     private void CalculateForInput(InputNode inputNode, float wantedValue)
     {
-        if (intermediateProducts.isOn)
-        {
-            inputNode.SetAmountWithAmount(wantedValue);
-        }
-
         if (wantedValue > inputNode.GetTextAmount())
         {
             offeredInputAmounts[inputs.IndexOf(inputNode)] = wantedValue;
-            //Umverteilen
         }
         else if(wantedValue < inputNode.GetTextAmount())
         {
-            inputNode.SetAmountWithAmount(wantedValue);
-
             if (offeredInputAmounts[inputs.IndexOf(inputNode)] > wantedValue)
             {
                 offeredInputAmounts[inputs.IndexOf(inputNode)] = wantedValue;
@@ -264,6 +77,8 @@ public class Splitter : GraphNode
                 maxedOutInputs[inputs.IndexOf(inputNode)] = true;
             }
         }
+
+        inputNode.SetAmountWithAmount(wantedValue);
     }
 
     private void CalculateForOutput(OutputNode outputNode, float wantedValue)
@@ -304,42 +119,43 @@ public class Splitter : GraphNode
         {
             TakeLess();
         }
-        if (Mathf.Abs(GetCurrentInputAmount() - GetCurrentOutputAmount()) < Mathf.Epsilon)
-        {
-            return;
-        }
-
-        if (dumpExcess.isOn)
-        {
-            dumpAmount.text = (GetCurrentInputAmount() - GetCurrentOutputAmount()).ToString();
-        }
         else
         {
-            GiveMoreToPrio1();
+            if (dumpExcess.isOn)
+            {
+                dumpAmount.text = (GetCurrentInputAmount() - GetCurrentOutputAmount()).ToString();
+            }
+            else
+            {
+                GiveMoreToPrio1();
+            }
         }
     }
 
     private void HandleTooMuchOutput()
     {
-        //Mehr angebotenes nutzen
+        GiveLessExcessToOutputs();
         if (Mathf.Abs(GetCurrentInputAmount() - GetCurrentOutputAmount()) < Mathf.Epsilon)
         {
             return;
         }
 
-        //Mehr verlangen
+        if (!intermediateProducts.isOn)
+        {
+            UseMoreOffered();
+            if (Mathf.Abs(GetCurrentInputAmount() - GetCurrentOutputAmount()) < Mathf.Epsilon)
+            {
+                return;
+            }
+        }
+
+        DemandMore();
         if (Mathf.Abs(GetCurrentInputAmount() - GetCurrentOutputAmount()) < Mathf.Epsilon)
         {
             return;
         }
 
-        //Weniger Überschüssiges abgeben
-        if (Mathf.Abs(GetCurrentInputAmount() - GetCurrentOutputAmount()) < Mathf.Epsilon)
-        {
-            return;
-        }
-
-        //Weniger abgeben
+        GiveLessToOutputs();
     }
 
     private void FullfillWantedValues()
@@ -347,7 +163,7 @@ public class Splitter : GraphNode
         int i = 0;
         while(i < outputs.Count && GetCurrentOutputAmount() < GetCurrentInputAmount())
         {
-            List<OutputNode> nodesToGive = GetOutputNodesByPriority(i, true, true);
+            List<OutputNode> nodesToGive = GetOutputNodesByPriority(i, true, false, true);
             float surplus = GetCurrentInputAmount() - GetCurrentOutputAmount();
 
             foreach (OutputNode outputNode in nodesToGive)
@@ -360,7 +176,7 @@ public class Splitter : GraphNode
                 }
             }
 
-            if(GetOutputNodesByPriority(i, true, true).Count == 0)
+            if(GetOutputNodesByPriority(i, true, false, true).Count == 0)
             {
                 i++;
             }
@@ -370,9 +186,9 @@ public class Splitter : GraphNode
     private void DemandLess()
     {
         int i = inputs.Count - 1;
-        while(i > 0 && GetCurrentOutputAmount() < GetCurrentInputAmount())
+        while(i >= 0 && GetCurrentOutputAmount() < GetCurrentInputAmount())
         {
-            List<InputNode> nodesToDemandLess = GetInputNodesByPriority(i, true, false);
+            List<InputNode> nodesToDemandLess = GetInputNodesByPriority(i, true, false, true, false);
             float surplus = GetCurrentInputAmount() - GetCurrentOutputAmount();
 
             foreach (InputNode inputNode in nodesToDemandLess)
@@ -383,9 +199,11 @@ public class Splitter : GraphNode
                 {
                     nodesToTell.Add(inputNode);
                 }
+
+                maxedOutInputs[inputs.IndexOf(inputNode)] = false;
             }
 
-            if(GetInputNodesByPriority(i, true, false).Count == 0)
+            if(GetInputNodesByPriority(i, true, false, true, false).Count == 0)
             {
                 i--;
             }
@@ -395,31 +213,31 @@ public class Splitter : GraphNode
     private void TakeLess()
     {
         int i = inputs.Count - 1;
-        while (i > 0 && GetCurrentOutputAmount() < GetCurrentInputAmount())
+        while (i >= 0 && GetCurrentOutputAmount() < GetCurrentInputAmount())
         {
-            List<InputNode> nodesToDemandLess = GetInputNodesByPriority(i, false, false);
+            List<InputNode> nodesToDemandLess = GetInputNodesByPriority(i, false, false, true, false);
             float surplus = GetCurrentInputAmount() - GetCurrentOutputAmount();
 
             foreach (InputNode inputNode in nodesToDemandLess)
             {
-                float inputAmount = Mathf.Max(inputNode.GetTextAmount() - surplus / nodesToDemandLess.Count, offeredInputAmounts[inputs.IndexOf(inputNode)]);
+                float inputAmount = inputNode.GetTextAmount() - surplus / nodesToDemandLess.Count;
                 inputNode.SetAmountWithAmount(inputAmount);
             }
 
-            if (GetInputNodesByPriority(i, false, false).Count == 0)
+            if (GetInputNodesByPriority(i, false, false, true, false).Count == 0)
             {
                 i--;
             }
         }
 
-        while(GetCurrentOutputAmount() < GetCurrentInputAmount())
+        while(Mathf.Abs(GetCurrentOutputAmount() - GetCurrentInputAmount()) > Mathf.Epsilon)
         {
-            List<InputNode> nodesToDemandLess = GetInputNodesByPriority(inputs.Count, false, false);
+            List<InputNode> nodesToDemandLess = GetInputNodesByPriority(inputs.Count, false, false, true, false);
             float surplus = GetCurrentInputAmount() - GetCurrentOutputAmount();
 
             foreach (InputNode inputNode in nodesToDemandLess)
             {
-                float inputAmount = Mathf.Max(inputNode.GetTextAmount() - surplus / nodesToDemandLess.Count, offeredInputAmounts[inputs.IndexOf(inputNode)]);
+                float inputAmount = inputNode.GetTextAmount() - surplus / nodesToDemandLess.Count;
                 inputNode.SetAmountWithAmount(inputAmount);
             }
         }
@@ -427,43 +245,146 @@ public class Splitter : GraphNode
 
     private void GiveMoreToPrio1()
     {
-        List<OutputNode> prio1OutputNodes = GetOutputNodesByPriority(0, false, true);
+        List<OutputNode> prio1OutputNodes = GetOutputNodesByPriority(0, false, false, true);
         float surplus = GetCurrentInputAmount() - GetCurrentOutputAmount();
 
         foreach (OutputNode outputNode in prio1OutputNodes)
         {
             outputNode.SetAmountWithAmount(outputNode.GetTextAmount() + surplus / prio1OutputNodes.Count);
+            if(!nodesToTell.Contains(outputNode))
+            {
+                nodesToTell.Add(outputNode);
+            }
         }
     }
 
-    private List<OutputNode> GetOutputNodesByPriority(int priority, bool useWantedValues, bool allowZeroValue)
+    private void GiveLessExcessToOutputs()
     {
-        List<OutputNode> returnValue = new List<OutputNode>();
-
-        for (int i = 0; i < outputs.Count; i++)
+        int i = outputs.Count - 1;
+        while (i >= 0 && GetCurrentOutputAmount() > GetCurrentInputAmount())
         {
-            if(outputPriorities[i] == priority 
-               && (!useWantedValues || wantedOutputValues[i] > outputs[i].GetTextAmount()) 
-               && (allowZeroValue || Mathf.Abs(outputs[i].GetTextAmount()) < Mathf.Epsilon))
+            List<OutputNode> nodesToGiveLessTo = GetOutputNodesByPriority(i, false, true, false);
+            float deficit = GetCurrentOutputAmount() - GetCurrentInputAmount();
+
+            foreach(OutputNode outputNode in nodesToGiveLessTo)
             {
-                returnValue.Add(outputs[i]);
+                float outputAmount = Mathf.Max(outputNode.GetTextAmount() - deficit / nodesToGiveLessTo.Count, wantedOutputValues[outputs.IndexOf(outputNode)]);
+                outputNode.SetAmountWithAmount(outputAmount);
+                if(!nodesToTell.Contains(outputNode))
+                {
+                    nodesToTell.Add(outputNode);
+                }
+            }
+
+            if(GetOutputNodesByPriority(i, false, true, false).Count == 0)
+            {
+                i--;
+            }
+        }
+    }
+
+    private void UseMoreOffered()
+    {
+        int i = 0;
+        while(i <= inputs.Count && GetCurrentOutputAmount() > GetCurrentInputAmount())
+        {
+            List<InputNode> nodesToUseMore = GetInputNodesByPriority(i, false, true, false, true);
+            float deficit = GetCurrentOutputAmount() - GetCurrentInputAmount();
+
+            foreach (InputNode inputNode in nodesToUseMore)
+            {
+                float inputAmount = Mathf.Min(inputNode.GetTextAmount() + deficit / nodesToUseMore.Count, offeredInputAmounts[inputs.IndexOf(inputNode)]);
+                inputNode.SetAmountWithAmount(inputAmount);
+            }
+
+            if (GetInputNodesByPriority(i, false, true, false, true).Count == 0)
+            {
+                i++;
+            }
+        }
+    }
+
+    private void DemandMore()
+    {
+        int i = 0;
+        while (i < inputs.Count && GetCurrentOutputAmount() > GetCurrentInputAmount())
+        {
+            List<InputNode> nodesToDemandMore = GetInputNodesByPriority(i, false, false, false, true);
+            float deficit = GetCurrentOutputAmount() - GetCurrentInputAmount();
+
+            foreach (InputNode inputNode in nodesToDemandMore)
+            {
+                float inputAmount = inputNode.GetTextAmount() + deficit / nodesToDemandMore.Count;
+                inputNode.SetAmountWithAmount(inputAmount);
+                if(!nodesToTell.Contains(inputNode))
+                {
+                    nodesToTell.Add(inputNode);
+                }
+            }
+
+            if (GetInputNodesByPriority(i, false, false, false, true).Count == 0)
+            {
+                i++;
+            }
+        }
+    }
+
+    private void GiveLessToOutputs()
+    {
+        int i = outputs.Count - 1;
+        while (i >= 0 && GetCurrentOutputAmount() > GetCurrentInputAmount())
+        {
+            List<OutputNode> nodesToGiveLessTo = GetOutputNodesByPriority(i, false, false, false);
+            float deficit = GetCurrentOutputAmount() - GetCurrentInputAmount();
+
+            foreach (OutputNode outputNode in nodesToGiveLessTo)
+            {
+                float outputAmount = outputNode.GetTextAmount() - deficit / nodesToGiveLessTo.Count;
+                outputNode.SetAmountWithAmount(outputAmount);
+                if (!nodesToTell.Contains(outputNode))
+                {
+                    nodesToTell.Add(outputNode);
+                }
+            }
+
+            if (GetOutputNodesByPriority(i, false, false, false).Count == 0)
+            {
+                i--;
+            }
+        }
+    }
+
+    private List<InputNode> GetInputNodesByPriority(int priority, bool demandingOnly, bool offeredAmountLeftOnly, bool allowMaxedOutInputs, bool allowZeroValue)
+    {
+        List<InputNode> returnValue = new List<InputNode>();
+
+        for (int i = 0; i < inputs.Count; i++)
+        {
+            if (inputPriorities[i] == priority
+                && (!demandingOnly || inputs[i].GetTextAmount() > offeredInputAmounts[i])
+                && (!offeredAmountLeftOnly || offeredInputAmounts[i] > inputs[i].GetTextAmount())
+                && (allowMaxedOutInputs || !maxedOutInputs[i])
+                && (allowZeroValue || Mathf.Abs(inputs[i].GetTextAmount()) > Mathf.Epsilon))
+            {
+                returnValue.Add(inputs[i]);
             }
         }
 
         return returnValue;
     }
 
-    private List<InputNode> GetInputNodesByPriority(int priority, bool demandingOnly, bool allowZeroValue)
+    private List<OutputNode> GetOutputNodesByPriority(int priority, bool wantingOnly, bool oversaturatedOnly, bool allowZeroValue)
     {
-        List<InputNode> returnValue = new List<InputNode>();
+        List<OutputNode> returnValue = new List<OutputNode>();
 
-        for (int i = 0; i < inputs.Count; i++)
+        for (int i = 0; i < outputs.Count; i++)
         {
-            if (inputPriorities[i] == priority 
-                && (!demandingOnly || inputs[i].GetTextAmount() > offeredInputAmounts[i]) 
-                && (allowZeroValue || Mathf.Abs(inputs[i].GetTextAmount()) < Mathf.Epsilon))
+            if(outputPriorities[i] == priority 
+               && (!wantingOnly || wantedOutputValues[i] > outputs[i].GetTextAmount()) 
+               && (!oversaturatedOnly || outputs[i].GetTextAmount() > wantedOutputValues[i])
+               && (allowZeroValue || Mathf.Abs(outputs[i].GetTextAmount()) > Mathf.Epsilon))
             {
-                returnValue.Add(inputs[i]);
+                returnValue.Add(outputs[i]);
             }
         }
 
